@@ -1,4 +1,5 @@
-# Word-Counter-Hassle free count of words at your finger tips.
+# Word-Counter   
+# Hassle free count of words at your fingertips.
 Ever wondered how to count the number of words in a document or draft a message having a specific word limit?
 
 Then word counter is the tool.
