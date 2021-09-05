@@ -133,61 +133,50 @@ app.get('/fileupload',function(req,res){
 app.get('/textbox',function(req,res){
     res.render('userhome',{message:"",msg:""}); 
 })
-app.post('/upload', uploaded.single('fileupload'), function (req, res) {
-    try {
-        const fileupload = req.file;
-        if (!fileupload) 
-        {
-            res.status(400).send("file not selected");
-            
-        }
-        else 
-        {
-          
+app.post('/upload', function (req, res) {
    
-    var pa='./uploadedfiles/'+fileupload.originalname;
-    fs.readFile(pa,'utf8',function(err,data){
-        if(err)
-            console.log(err);
-        else{
-          var count=0;
+        
+    
+          
+            var count=0;
+            var data=req.body.text1;
             
                  var words=data.trim().replace(/\s+|\.|,|\?/g," ").split(" ");
-            for(var i=0;i<words.length;i++)
-             {
-                 if(words[i])
-                     count++;
-             }
-            console.log(count);
-            res.render('fileupload',{message:"No of words in uploaded document is "+ count});
-        }
-    
-});  
-          
-        }
-
-    } 
-    catch (err) {
-        res.status(500).send(err);
-    }
-});
-
-app.post('/textupload',function(request,response){
-    console.log(request.body.textinput);
-     var count=0;
-            var data=request.body.textinput;
-                 var words=data.trim().replace(/\s+|\.|,|\?/g," ").split(" ");
-         console.log(data);
-                  console.log(words);
+        
+                 
     
          for(var i=0;i<words.length;i++)
              {
                  if(words[i])
                      count++;
              }
-            console.log(count);
+            
            
-            response.render('userhome',{message:"No of words in uploaded document is "+ count,msg:data});
+            res.render('fileupload',{message:"No of words in uploaded document is "+ count,msg:data});
+    
+          
+        
+
+    
+    
+});
+
+app.post('/textupload',function(request,response){
+   
+     var count=0;
+            var data=request.body.textinput;
+                 var words=data.trim().replace(/\s+|\.|,|\?/g," ").split(" ");
+        
+                  
+    
+         for(var i=0;i<words.length;i++)
+             {
+                 if(words[i])
+                     count++;
+             }
+            
+           
+            response.render('userhome',{message:"No of words in entered text is "+ count,msg:data});
         });
     
 

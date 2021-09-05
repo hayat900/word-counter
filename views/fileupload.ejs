@@ -3,6 +3,7 @@
 
 <head> 
 	<title>FILE UPLOAD</title>
+    <script type="text/javascript" src="http://yandex.st/jquery/1.4.2/jquery.min.js"></script>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
@@ -21,12 +22,29 @@
        
         margin-top:5%;
         box-shadow:5px 5px 8px 8px;
+        
+    }
+    .card-body{
+        height:30rem;
     }
     body{
         background-color:lavender;
     }
-    
-    
+    .button{
+        background-color: rgba(6, 172, 34, 0.8);
+  border: none;
+  color: black;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 16px;
+    }
+    .button:hover {
+  background-color: rgb(6, 172, 34,1.0);
+}
     </style>
     </head>
 <body> 
@@ -49,15 +67,16 @@
     <div class="container">
         <div class="row">
             <div class="col"></div>
-           <div class="offset-3 col-sm-12">
+           <div class="offset-2 col-sm-12">
 <div class="card">
     <div class="card-body">
 	<form action="/upload"
-	enctype="multipart/form-data" method="POST"> 
+	 method="POST"> 
 	<label for="fil"></label>
         <input type=file name=fileupload id=fil required><br><br>
-        <input type="submit"class="btn btn-success  btn-lg" value="click for word count"><br><br>
-         <h4><%=message%></h4>
+        <textarea name="text1" rows="5" cols="50" id="demo" hidden></textarea><br/>
+        <input type="submit"class="btn btn-success btn-lg btn-block" value="Count"><br><br>
+         <p><i><%=message%></i></p>
 	</form> 
        
     </div>
@@ -66,6 +85,19 @@
             <div class="col"></div>
         </div>
 </div>
+<script type="text/javascript">
+    document.getElementById('fil')
+        .addEventListener('change', function() {
+          
+        var fr=new FileReader();
+        fr.onload=function(){
+            document.getElementById('demo')
+                    .textContent=fr.result;
+        }
+          
+        fr.readAsText(this.files[0]);
+    })
+</script>
 </body> 
 
 </html> 
